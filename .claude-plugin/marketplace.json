@@ -2,7 +2,7 @@
   "name": "paperjsx-agent-skill",
   "owner": {
     "name": "PaperJSX",
-    "email": "hello@execemy.com"
+    "email": "hello@paperjsx.com"
   },
   "metadata": {
     "description": "PaperJSX agent skill — generate PPTX, DOCX, XLSX, and PDF documents from JSON",
