@@ -1,0 +1,22 @@
+{
+  "name": "paperjsx-agent-skill",
+  "owner": {
+    "name": "PaperJSX",
+    "email": "hello@execemy.com"
+  },
+  "metadata": {
+    "description": "PaperJSX agent skill — generate PPTX, DOCX, XLSX, and PDF documents from JSON",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "paperjsx",
+      "description": "Generate PPTX presentations, DOCX documents, XLSX spreadsheets, and PDF invoices/reports/charts from structured JSON. Runs locally via @paperjsx/mcp-server.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/paperjsx"
+      ]
+    }
+  ]
+}

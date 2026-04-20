@@ -1,5 +1,0 @@
-{
-  "name": "paperjsx",
-  "version": "1.0.0",
-  "description": "Generate PPTX, DOCX, XLSX, and PDF documents from JSON using PaperJSX"
-}
