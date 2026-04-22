@@ -1,67 +1,50 @@
 # PaperJSX Agent Skill
 
-Generate PPTX presentations, DOCX documents, XLSX spreadsheets, and PDF reports from structured JSON using the free-tier `@paperjsx/*` packages. Runs locally — no API key, no network calls.
+Generate PPTX presentations, DOCX documents, XLSX spreadsheets, and PDF reports from validated JSON using the free-tier `@paperjsx/*` packages. Runs locally through `@paperjsx/mcp-server` with no API key and no hosted backend.
 
-This repo distributes the PaperJSX skill to multiple AI agent platforms.
+This bundle is generated from the source-of-truth agent files in the PaperJSX monorepo so GitHub, Claude, and Codex distribution stay in sync.
 
----
+## Install
 
-## Claude Code
+### Claude Code
 
 ```bash
 /plugin marketplace add paperjsx/agent-skill
 /plugin install paperjsx@paperjsx-agent-skill
 ```
 
-Then: *"Use PaperJSX to create a 3-slide presentation about Q4 results."*
+### Claude.ai
 
-## Claude.ai (Pro / Team / Enterprise)
+Upload the generated `paperjsx-skill.zip` bundle from this repo's release artifacts, or rebuild it locally with:
 
-1. Zip the skill folder: `zip -r paperjsx-skill.zip skills/paperjsx/`
-2. Go to **claude.ai → Settings → Customize → Skills → +**
-3. Upload `paperjsx-skill.zip`, toggle on.
+```bash
+./scripts/generate.sh
+```
 
-## Codex CLI (OpenAI)
+Then go to **claude.ai → Settings → Customize → Skills → +** and upload the ZIP.
+
+### Codex CLI
 
 ```bash
 $skill-installer install https://github.com/paperjsx/agent-skill
 ```
 
-Or manual:
+Or copy the skill manually:
+
 ```bash
 cp -r skills/paperjsx ~/.codex/skills/paperjsx
 ```
 
-## Gemini CLI
-
-Install via the [paperjsx/gemini-extension](https://github.com/paperjsx/gemini-extension) repo, or add to `~/.gemini/settings.json`:
-
-```json
-{
-  "mcpServers": {
-    "paperjsx": {
-      "command": "npx",
-      "args": ["@paperjsx/mcp-server"]
-    }
-  }
-}
-```
-
-## MCP Server Config Snippets
-
-All of these use the `@paperjsx/mcp-server` package (free, local, no API key).
+## MCP Setup
 
 ### Claude Desktop
 
-`~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) /
-`%APPDATA%\Claude\claude_desktop_config.json` (Windows)
-
 ```json
 {
   "mcpServers": {
     "paperjsx": {
       "command": "npx",
-      "args": ["@paperjsx/mcp-server"]
+      "args": ["-y", "@paperjsx/mcp-server"]
     }
   }
 }
@@ -69,53 +52,62 @@ All of these use the `@paperjsx/mcp-server` package (free, local, no API key).
 
 ### Cursor
 
-`.cursor/mcp.json`
-
 ```json
 {
   "mcpServers": {
     "paperjsx": {
       "command": "npx",
-      "args": ["@paperjsx/mcp-server"]
+      "args": ["-y", "@paperjsx/mcp-server"]
     }
   }
 }
 ```
 
-### VS Code (GitHub Copilot)
-
-`.vscode/mcp.json`
+### VS Code Copilot
 
 ```json
 {
   "servers": {
     "paperjsx": {
       "command": "npx",
-      "args": ["@paperjsx/mcp-server"]
+      "args": ["-y", "@paperjsx/mcp-server"]
     }
   }
 }
 ```
 
-### Windsurf
+### Gemini CLI
 
-`~/.windsurf/mcp.json` (same format as Cursor)
+```json
+{
+  "mcpServers": {
+    "paperjsx": {
+      "command": "npx",
+      "args": ["-y", "@paperjsx/mcp-server"]
+    }
+  }
+}
+```
 
-### Cline
-
-VS Code settings → Cline MCP Servers → Add server with command `npx @paperjsx/mcp-server`.
-
----
-
-## What's in this repo
+## Repo Layout
 
 | Path | Purpose |
-|---|---|
-| `.claude-plugin/plugin.json` | Claude Code plugin manifest |
-| `skills/paperjsx/SKILL.md` | Skill definition for Claude and Codex |
-| `skills/paperjsx/references/json-schema.md` | JSON schema reference for document formats |
-| `agents/openai.yaml` | OpenAI-compatible agent spec |
+| --- | --- |
+| `.claude-plugin/plugin.json` | Claude skill/plugin manifest |
+| `.claude-plugin/marketplace.json` | Claude marketplace metadata |
+| `skills/paperjsx/SKILL.md` | Main skill definition |
+| `skills/paperjsx/references/` | Generated schema and example references |
+| `agents/openai.yaml` | Codex/OpenAI metadata |
+| `scripts/generate.sh` | Rebuilds the Claude upload ZIP from repo contents |
+
+## Release Source
+
+- Skill source: `packages/mcp-server/SKILL.md`
+- References: `packages/mcp-server/references/*.md`
+- OpenAI metadata: `packages/mcp-server/agents/openai.yaml`
+- Skill version: `1.0.0`
+- MCP server version: `0.3.1`
 
 ## License
 
-Apache-2.0 — see [LICENSE](./LICENSE).
+Apache-2.0. See [LICENSE](./LICENSE).

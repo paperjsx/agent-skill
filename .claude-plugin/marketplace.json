@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "paperjsx",
-      "description": "Generate PPTX presentations, DOCX documents, XLSX spreadsheets, and PDF invoices/reports/charts from structured JSON. Runs locally via @paperjsx/mcp-server.",
+      "description": "Generate PPTX presentations, DOCX documents, XLSX spreadsheets, and PDF invoices, reports, and charts from structured JSON. Runs locally via @paperjsx/mcp-server.",
       "source": "./",
       "strict": false,
       "skills": [

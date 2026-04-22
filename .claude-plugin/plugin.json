@@ -1,0 +1,8 @@
+{
+  "name": "paperjsx",
+  "version": "1.0.0",
+  "description": "Generate PPTX presentations, DOCX documents, XLSX spreadsheets, and PDF reports from validated JSON using PaperJSX.",
+  "skills": [
+    "./skills/paperjsx"
+  ]
+}
